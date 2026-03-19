@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Membership Plans — Curl Fitness</title>
+  <meta name="description" content="Explore Curl Fitness membership plans: Basic, Standard, and Premium — transparent pricing with no hidden fees."/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+  <link rel="stylesheet" href="css/style.css"/>
+  <style>
+    /* Extra membership-page styles */
+    .duration-toggle {
+      display: flex; align-items: center; justify-content: center; gap: 1.2rem;
+      margin-bottom: 3rem;
+    }
+    .toggle-label { font-size: 0.9rem; font-weight: 600; color: var(--color-muted); }
+    .toggle-label.active { color: var(--color-white); }
+    .toggle-switch {
+      width: 52px; height: 28px;
+      background: var(--color-border);
+      border-radius: 14px;
+      position: relative; cursor: pointer;
+      border: 1px solid rgba(255,255,255,0.1);
+      transition: background 0.3s;
+    }
+    .toggle-switch.on { background: var(--color-accent); }
+    .toggle-knob {
+      position: absolute; top: 3px; left: 3px;
+      width: 20px; height: 20px;
+      background: white; border-radius: 50%;
+      transition: transform 0.3s;
+    }
+    .toggle-switch.on .toggle-knob { transform: translateX(24px); }
+    .save-badge {
+      background: rgba(232,255,0,0.12);
+      color: var(--color-accent);
+      font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 1px; text-transform: uppercase;
+      padding: 0.2rem 0.6rem; border-radius: 6px;
+    }
+    .faq-item {
+      border-bottom: 1px solid var(--color-border);
+      padding: 1.2rem 0;
+    }
+    .faq-question {
+      display: flex; align-items: center; justify-content: space-between;
+      cursor: pointer; font-weight: 600; font-size: 0.95rem;
+    }
+    .faq-question i { color: var(--color-accent); transition: transform 0.3s; }
+    .faq-answer {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      max-height: 0; overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+    .faq-item.open .faq-answer { max-height: 200px; padding-top: 0.8rem; }
+    .faq-item.open .faq-question i { transform: rotate(45deg); }
+  </style>
+</head>
+<body>
+
+  <div id="loader">
+    <div class="loader-logo">CURL<span style="color:#fff">FITNESS</span></div>
+    <div class="loader-bar"></div>
+  </div>
+
+  <nav class="navbar">
+    <a href="index.html" class="nav-logo">CURL<span>FITNESS</span></a>
+    <div class="nav-overlay"></div>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="services.html">Programs</a></li>
+      <li><a href="membership.html" class="active">Membership</a></li>
+      <li><a href="trainers.html">Trainers</a></li>
+      <li><a href="contact.html">Contact</a></li>
+      <li><a href="membership.html" class="nav-cta">Join Now</a></li>
+    </ul>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </nav>
+
+  <!-- Page Hero -->
+  <section class="page-hero">
+    <div class="container page-hero-content">
+      <span class="section-tag"><i class="fas fa-crown"></i> Pricing</span>
+      <h1 class="section-title">Choose Your <span class="highlight">Plan</span></h1>
+      <p class="section-subtitle">Simple, transparent pricing. No hidden fees, no lock-ins. Just pure fitness.</p>
+    </div>
+  </section>
+
+  <!-- ====== Pricing Cards ====== -->
+  <section class="section">
+    <div class="container">
+      <!-- Toggle -->
+      <div class="duration-toggle" data-aos="fade-up">
+        <span class="toggle-label active" id="monthlyLabel">Monthly</span>
+        <div class="toggle-switch" id="pricingToggle" onclick="togglePricing()">
+          <div class="toggle-knob"></div>
+        </div>
+        <span class="toggle-label" id="annualLabel">Annual <span class="save-badge">Save 20%</span></span>
+      </div>
+
+      <div class="pricing-grid">
+        <!-- Basic -->
+        <div class="glass-card pricing-card" data-aos="fade-up" data-aos-delay="0">
+          <p class="pricing-name">Basic</p>
+          <div class="pricing-price" id="basicPrice"><sup>₹</sup>999<sub>/mo</sub></div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check-circle"></i> Gym Access (6 AM–10 PM)</li>
+            <li><i class="fas fa-check-circle"></i> Locker Room Access</li>
+            <li><i class="fas fa-check-circle"></i> Basic Equipment Zone</li>
+            <li><i class="fas fa-check-circle"></i> 1 Group Class / Month</li>
+            <li class="disabled"><i class="fas fa-times-circle"></i> Personal Trainer</li>
+            <li class="disabled"><i class="fas fa-times-circle"></i> Nutrition Consultation</li>
+            <li class="disabled"><i class="fas fa-times-circle"></i> Spa Access</li>
+          </ul>
+          <a href="contact.html" class="btn btn-secondary" style="width:100%;justify-content:center;">Get Started</a>
+        </div>
+
+        <!-- Standard -->
+        <div class="glass-card pricing-card featured" data-aos="fade-up" data-aos-delay="150">
+          <span class="pricing-badge">Most Popular</span>
+          <p class="pricing-name">Standard</p>
+          <div class="pricing-price" id="standardPrice"><sup>₹</sup>1,799<sub>/mo</sub></div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check-circle"></i> 24/7 Gym Access</li>
+            <li><i class="fas fa-check-circle"></i> Locker Room + Towel Service</li>
+            <li><i class="fas fa-check-circle"></i> All Equipment Zones</li>
+            <li><i class="fas fa-check-circle"></i> Unlimited Group Classes</li>
+            <li><i class="fas fa-check-circle"></i> 2 PT Sessions / Month</li>
+            <li><i class="fas fa-check-circle"></i> Basic Nutrition Guide</li>
+            <li class="disabled"><i class="fas fa-times-circle"></i> Spa Access</li>
+          </ul>
+          <a href="contact.html" class="btn btn-primary" style="width:100%;justify-content:center;">Join Now</a>
+        </div>
+
+        <!-- Premium -->
+        <div class="glass-card pricing-card" data-aos="fade-up" data-aos-delay="300">
+          <p class="pricing-name">Premium</p>
+          <div class="pricing-price" id="premiumPrice"><sup>₹</sup>2,999<sub>/mo</sub></div>
+          <div class="pricing-divider"></div>
+          <ul class="pricing-features">
+            <li><i class="fas fa-check-circle"></i> 24/7 Gym Access (Priority)</li>
+            <li><i class="fas fa-check-circle"></i> Locker + Towel + Amenities</li>
+            <li><i class="fas fa-check-circle"></i> All Equipment Zones</li>
+            <li><i class="fas fa-check-circle"></i> Unlimited Group Classes</li>
+            <li><i class="fas fa-check-circle"></i> Unlimited PT Sessions</li>
+            <li><i class="fas fa-check-circle"></i> Full Nutrition Program</li>
+            <li><i class="fas fa-check-circle"></i> Spa &amp; Recovery Access</li>
+          </ul>
+          <a href="contact.html" class="btn btn-orange" style="width:100%;justify-content:center;">Go Premium</a>
+        </div>
+      </div>
+
+      <p style="text-align:center;color:var(--color-muted);font-size:0.85rem;margin-top:2rem;">
+        <i class="fas fa-shield-halved" style="color:var(--color-accent)"></i>
+        All plans include a 7-day money-back guarantee. No contract. Cancel anytime.
+      </p>
+    </div>
+  </section>
+
+  <div class="gradient-line"></div>
+
+  <!-- ====== Comparison Table ====== -->
+  <section class="section" style="background:var(--color-bg-2);">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:3rem;" data-aos="fade-up">
+        <span class="section-tag"><i class="fas fa-table"></i> Compare</span>
+        <h2 class="section-title">Plan <span class="highlight">Comparison</span></h2>
+      </div>
+      <div style="overflow-x:auto;" data-aos="fade-up">
+        <table style="width:100%;border-collapse:collapse;font-size:0.92rem;">
+          <thead>
+            <tr>
+              <th style="text-align:left;padding:1rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);font-weight:600;text-transform:uppercase;letter-spacing:1px;font-size:0.78rem;">Feature</th>
+              <th style="text-align:center;padding:1rem;border-bottom:1px solid var(--color-border);">Basic</th>
+              <th style="text-align:center;padding:1rem;border-bottom:1px solid var(--color-border);color:var(--color-accent);">Standard</th>
+              <th style="text-align:center;padding:1rem;border-bottom:1px solid var(--color-border);">Premium</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td style="padding:0.9rem 1rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);">Gym Access Hours</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);">6 AM–10 PM</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);color:var(--color-accent);">24/7</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);">24/7 Priority</td></tr>
+            <tr><td style="padding:0.9rem 1rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);">Group Classes</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);">1/month</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);color:var(--color-accent);">Unlimited</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);">Unlimited</td></tr>
+            <tr><td style="padding:0.9rem 1rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);">Personal Trainer</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);">✕</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);color:var(--color-accent);">2 sessions</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);">Unlimited</td></tr>
+            <tr><td style="padding:0.9rem 1rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);">Nutrition Guide</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);">✕</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);color:var(--color-accent);">Basic</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);">Full Program</td></tr>
+            <tr><td style="padding:0.9rem 1rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);">Spa Access</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);">✕</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);color:var(--color-muted);">✕</td><td style="text-align:center;padding:0.9rem;border-bottom:1px solid var(--color-border);">✓</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <div class="gradient-line"></div>
+
+  <!-- ====== FAQ ====== -->
+  <section class="section">
+    <div class="container" style="max-width:760px;">
+      <div style="text-align:center;margin-bottom:3rem;" data-aos="fade-up">
+        <span class="section-tag"><i class="fas fa-question-circle"></i> FAQ</span>
+        <h2 class="section-title">Common <span class="highlight">Questions</span></h2>
+      </div>
+      <div data-aos="fade-up">
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I cancel my membership anytime?</span>
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="faq-answer">Yes! All plans are month-to-month. You can cancel anytime before your next billing cycle with no penalties or hidden fees.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Is there a joining fee?</span>
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="faq-answer">There is a one-time registration fee of ₹499. We often run promotions where this fee is waived — check our contact page for current offers.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Can I freeze my membership?</span>
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="faq-answer">Yes, you can freeze your membership for up to 2 months per year. Just notify us 7 days in advance at the front desk or via email.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>Do you offer student discounts?</span>
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="faq-answer">Absolutely! Show your valid student ID at reception for a 15% discount on any plan. Discount applies on monthly billing only.</div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question" onclick="toggleFaq(this)">
+            <span>What happens if I miss PT sessions?</span>
+            <i class="fas fa-plus"></i>
+          </div>
+          <div class="faq-answer">PT sessions can be rescheduled up to 24 hours in advance. Sessions missed without notice are forfeited for that month.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="cta-banner">
+    <div class="container" data-aos="zoom-in">
+      <h2 class="section-title">Still Deciding? <span class="highlight">Try Us Free</span></h2>
+      <p class="section-subtitle">Visit us for a free 1-day trial pass. No commitment needed, just come train and feel the difference.</p>
+      <div class="cta-banner-buttons">
+        <a href="contact.html" class="btn btn-primary"><i class="fas fa-ticket"></i> Claim Free Trial</a>
+        <a href="trainers.html" class="btn btn-secondary"><i class="fas fa-users"></i> Meet Our Trainers</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="index.html" class="nav-logo">CURL<span>FITNESS</span></a>
+          <p>Your premium fitness destination. Transform your body and life with expert coaching.</p>
+          <div class="footer-socials">
+            <a href="#" class="footer-social"><i class="fab fa-instagram"></i></a>
+            <a href="#" class="footer-social"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" class="footer-social"><i class="fab fa-youtube"></i></a>
+            <a href="#" class="footer-social"><i class="fab fa-x-twitter"></i></a>
+          </div>
+        </div>
+        <div class="footer-col">
+          <h4>Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="services.html">Programs</a></li>
+            <li><a href="membership.html">Membership</a></li>
+            <li><a href="trainers.html">Trainers</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Programs</h4>
+          <ul class="footer-links">
+            <li><a href="services.html">Weight Training</a></li>
+            <li><a href="services.html">Cardio Training</a></li>
+            <li><a href="services.html">Personal Training</a></li>
+            <li><a href="services.html">Yoga / Zumba</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h4>Contact Info</h4>
+          <div class="footer-contact-item"><i class="fas fa-location-dot"></i><span>123 Fitness Street, Mumbai, MH 400001</span></div>
+          <div class="footer-contact-item"><i class="fas fa-phone"></i><a href="tel:+919876543210">+91 98765 43210</a></div>
+          <div class="footer-contact-item"><i class="fas fa-envelope"></i><a href="mailto:example@gmail.com">example@gmail.com</a></div>
+        </div>
+      </div>
+      <div class="footer-bottom"><p>&copy; 2024 <span>Curl Fitness</span>. All rights reserved.</p></div>
+    </div>
+  </footer>
+
+  <button id="backToTop" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+  <script src="js/main.js"></script>
+  <script>
+    // Monthly/Annual price toggle
+    const prices = {
+      basic:    { monthly: '₹999',   annual: '₹799' },
+      standard: { monthly: '₹1,799', annual: '₹1,439' },
+      premium:  { monthly: '₹2,999', annual: '₹2,399' },
+    };
+    let isAnnual = false;
+    function togglePricing() {
+      isAnnual = !isAnnual;
+      document.getElementById('pricingToggle').classList.toggle('on', isAnnual);
+      document.getElementById('monthlyLabel').classList.toggle('active', !isAnnual);
+      document.getElementById('annualLabel').classList.toggle('active', isAnnual);
+      const mode = isAnnual ? 'annual' : 'monthly';
+      const suffix = isAnnual ? '/mo (billed annually)' : '/mo';
+      document.getElementById('basicPrice').innerHTML    = `<sup>₹</sup>${prices.basic[mode].replace('₹','')}<sub>/${isAnnual?'mo*':'mo'}</sub>`;
+      document.getElementById('standardPrice').innerHTML = `<sup>₹</sup>${prices.standard[mode].replace('₹','')}<sub>/${isAnnual?'mo*':'mo'}</sub>`;
+      document.getElementById('premiumPrice').innerHTML  = `<sup>₹</sup>${prices.premium[mode].replace('₹','')}<sub>/${isAnnual?'mo*':'mo'}</sub>`;
+    }
+    // FAQ accordion
+    function toggleFaq(el) {
+      const item = el.parentElement;
+      item.classList.toggle('open');
+    }
+  </script>
+</body>
+</html>
